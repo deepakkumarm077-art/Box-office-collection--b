@@ -5,11 +5,29 @@ import numpy as np
 import joblib
 import os
 import re
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Movie Box Office Prediction API",
     description="Predict Box Office Collection from movie input features.",
     version="1.1.0",
+)
+
+ALLOWED_ORIGINS = [
+    "https://ais-dev-ypfyd2j2e2f3ntvj47zsb4-592544366683.asia-east1.run.app",
+    "https://ais-pre-ypfyd2j2e2f3ntvj47zsb4-592544366683.asia-east1.run.app",
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # ------------------------------------------------------------------
